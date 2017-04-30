@@ -1,31 +1,41 @@
 clc;clear all;close all;
 %%
-N=5000;
-X=randn(N,1);
-U=rand(N,1);
+number_of_accepted_samples=0;
 lambda=1;
-Q=100;
 
-q = @(x) 1/sqrt(2*pi).*exp(-(x).^2./2).*Q;
-p = @(x) lambda.*exp(-lambda.*x);
+% X=exprnd(1,1,N);
+% U=rand(N,1);
 
-figure(1);clf;
-x_plot=linspace(-4,4,100);
-plot(x_plot,p(x_plot));hold all;
-plot(x_plot,q(x_plot));
+% Q=100;
+Q=1;
+p = @(x) 1/sqrt(2*pi).*exp(-(x).^2./2).*Q;
+q_hat = @(x) lambda.*exp(-lambda.*x);
+q= @(x) q_hat(x)*Q;
+
+
+number_of_rejected=0;
 
 % accept reject method:
 X_transformed=[];
-for i=1:N
-    if(U(i)<= p(X(i))/q(X(i)))
-        X_transformed=[X_transformed X(i)];
+while number_of_accepted_samples<5000
+	U=rand();X=exprnd(1);
+    sign=rand();
+
+    if(U<= p(X)/q(X))
+        if(sign<0.5)
+            X_transformed=[X_transformed X];
+        else
+            X_transformed=[X_transformed -X];
+        end
 %         disp('accept');
+        number_of_accepted_samples = number_of_accepted_samples +1;
     else
 %         disp('reject');
+        number_of_rejected=number_of_rejected+1;
     end
 end
 
-disp(['number of accepted:' num2str(size(X_transformed,2))]);
+disp(['number of rejected:' num2str(number_of_rejected)]);
 
 figure(2);clf;
 histogram(X_transformed);hold all;
