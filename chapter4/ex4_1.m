@@ -1,6 +1,6 @@
 f = @(x)  1/(1+x.^2);
 N_start=1;
-max_iter=70;
+max_iter=100;
 
 N=N_start;
 
@@ -22,7 +22,7 @@ while N<max_iter
     var=[var var_hat/(N-1)];
 end
 
-figure;
+figure(1);clf;
 subplot(2,2,1);
 plot(F);title('average');
 subplot(2,2,2);
@@ -31,3 +31,8 @@ subplot(2,1,2);
 plot(F-(pi/4));title('error');
 
 % how to get an estimate of the variance of IN from one approximation?????
+% figure1 shows the on the fly estimation of the variance, if N is a bit
+% higher then 10 then the estimation is allrdy ok.
+
+% I dont see how you could estimate the variance if you do not use this on
+% the fly algorithm
