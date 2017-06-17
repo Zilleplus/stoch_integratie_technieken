@@ -1,11 +1,12 @@
 % stability of geometric Brownian motion (3.41)
-num_of_points=500; 
+
 figure(1);clf;
 init_position=1;
 
 %% SDE and discretization are mean square stable
 lambda=-10^4;
 mu=1;
+num_of_points=50; 
 
 delta_t=10^-5;
 
@@ -26,6 +27,7 @@ disp('----------');
 
 lambda=-10^4;
 mu=1;
+num_of_points=20;
 
 % change the delta_t as this will not change the stabilty for the SDE
 delta_t=2*10^-4;
@@ -48,6 +50,7 @@ disp('----------');
 % determine the lambda and mu so that the SDE is only asymptotic
 lambda=1;
 mu=-2;
+num_of_points=1200;
 
 % change the delta_t as this will not change the stabilty for the SDE
 delta_t=10^-4;
@@ -69,6 +72,7 @@ disp('----------');
 
 lambda=-10^4;
 mu=1;
+num_of_points=40;
 
 % change the delta_t as this will not change the stabilty for the SDE
 delta_t=3*10^-4;
